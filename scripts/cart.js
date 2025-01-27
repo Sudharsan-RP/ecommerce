@@ -1,7 +1,7 @@
 // let cart = JSON.parse(localStorage.getItem('Cart')) || [];
 
 // localStorage.setItem('Cart' , JSON.stringify('cart'))
-export let cart = JSON.parse(localStorage.getItem('cartItems')) || [
+export let cart = [
   {
     productId: '1',
     quantity: 1,
@@ -15,7 +15,7 @@ export let cart = JSON.parse(localStorage.getItem('cartItems')) || [
   }
 ];
 
-localStorage.setItem('cartItems', JSON.stringify(cart));
+// localStorage.setItem('cartItems', JSON.stringify(cart));
 
 // let getItem = JSON.parse(localStorage.getItem('cartItems'));
 
