@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
@@ -35,5 +36,40 @@
         .innerHTML = data.message || data.error
     })
   </script>
+=======
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>db connection checking</h1>
+    <input type="text" placeholder="name" id="name">
+    <input type="text" placeholder="id" id="id">
+    <input type="number" placeholder="quantity" id="quantity">
+    <button type="submit" id="add-product">add product</button>
+
+    <div id="details"></div>
+
+    <script>
+        document.getElementById('add-product').addEventListener('click', async(e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const id = document.getElementById('id').value;
+            const quantity = document.getElementById('quantity').value;
+
+            const response = await fetch('http://localhost:3000/cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, id, quantity })
+            })
+            const data = await response.json();
+            document.getElementById('details')
+                .innerHTML = data.message || data.error;
+        })
+    </script>
+>>>>>>> bcab96c46082525dbda88a88afdf54f1e7550bec
 </body>
 </html>
