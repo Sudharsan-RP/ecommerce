@@ -4,11 +4,79 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>global cart page</title>
+  <link rel="stylesheet" href="./styles/global-ac-navbar.css">
   <link rel="stylesheet" href="./styles/global-ac-cart.css">
 </head>
 <body>
-  <div class="container"></div>
+    <div class="header">
 
+        <!-- navigation bar  -->
+  
+        <div class="navbar">
+          <nav>
+            <div class="title"> 
+              <span class="span1"> global </span> 
+              <span class="span2">air condition</span>
+            </div>
+            <div class="searchbar">
+              <div>
+                <input type="search" placeholder="search for products, brands and more">
+              </div>
+              <div>
+                <img src="./images/nav-imgs/search.png" width="40px" height="40px">
+              </div>
+            </div>
+  
+            <div class="login-button">
+              <button> login </button>
+            </div>
+            <div class="lists">
+                <div class="service">
+                  <img src="./images/nav-imgs/service-logo.png" width="40px" height="40px">
+                </div>
+                <div class="about">about</div>
+                <div class="contact">contact</div>
+            </div>
+          </nav>
+        </div>
+    </div>
+
+  <div class="container">
+    <div class="product-info">
+        <div class="top">
+            <div class="title">shopping cart</div>
+            <div class="price">price</div>
+        </div>
+         
+        <div class="bottom">
+            <!--
+            <div class="bottom-container">
+                <div class="img"><img src="./images/product-img/fridge.webp" alt="fridge"></div>
+
+                <div class="details">
+                    <div class="name">
+                        Whirlpool 300 L Frost Free Triple-Door Refrigerator(FP 343D Protton Roy, Alpha Steel)
+                    </div>
+                    <div class="quantity">
+                        <button> - </button>
+                        <p class="count"> 5 </p>
+                        <button> + </button>
+                    </div>
+                </div>
+            </div>
+            <div class="price">
+                <p>₹10000</p>
+            </div>
+            -->
+        </div> 
+    </div> 
+
+    <div class="order-summary">
+        <p>total products</p>
+        <div id="total-quantity">3</div>
+        <button class="buy"> proceed to buy </button>
+    </div> 
+  </div>
   <script src="./scripts/cartdetails.js"></script>
 </body>
 </html>

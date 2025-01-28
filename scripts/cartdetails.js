@@ -6,9 +6,9 @@ async function fetchCartItems() {
     console.log(cartItems.cartItems);
 
     const data = cartItems.cartItems;
-    
+    const bottom = document.querySelector('.bottom');
      if(data.length === 0) {
-      container.innerHTML = `<h3> your cart is empty </h3>`
+      bottom.innerHTML = `<h3> your cart is empty </h3>`
       return;
      }
     
@@ -18,18 +18,32 @@ async function fetchCartItems() {
       console.log(item);
 
       cartHtml = 
-      `<h1> cart page </h1>
-        <img src="${item.productImage}" alt="image" />
-        <p> ${item.productName} </p>
-        <p> ${item.productPrice} </p>
-        <p> ${item.quantity} </p>
-        <button onclick="increaseQuantity(${item._id}, ${item.quantity})"> add </button>
-        <button onclick="removeItem(${item._id})"> remove </button>
+      `<div class="bottom-container">
+            <div class="img"><img src="${item.productImage}" alt="electronics"></div>
 
-        <div id="message"> </div>
+            <div class="details">
+                <div class="name">
+                    ${item.productName}
+                </div>
+                <div class="quantity">
+                    <button> - </button>
+                    <p class="count"> ${item.quantity} </p>
+                    <button> + </button>
+                </div>
+            </div>
+        </div>
+        <div class="price">
+            <p>${item.productPrice}</p>
+        </div>
       `
-      document.querySelector('.container')
+     
+        
+      document.querySelector('.bottom')
         .innerHTML += cartHtml;
+
+      const total = data.length;
+      console.log(total)
+      document.getElementById('total-quantity').innerHTML = total;
     })
   } catch(err) {
     console.log('error fetching cart items :', err);
