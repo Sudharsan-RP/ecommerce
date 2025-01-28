@@ -39,8 +39,9 @@ products.forEach((product) => {
                 <option value="5"> 5 </option>
               </select>
             </div>
+            <div id="message">message</div>
             <div class="button">
-              <button class="js-add-to-cart" data-product-id = ${product.id} data-product-image = ${product.image}>
+              <button type="submit" class="js-add-to-cart" data-product-id = ${product.id} data-product-image = ${product.image} data-product-name = ${product.name} data-product-price = ${product.price}>
                 add to cart
               </button>
               <button>buy now</button>
@@ -54,11 +55,33 @@ document.querySelector('.products-grid')
 
 document.querySelectorAll('.js-add-to-cart')
   .forEach((cartButton) => {
-    cartButton.addEventListener('click', () => {
+    cartButton.addEventListener('click', async(e) => {
+      e.preventDefault();
 
       const productId = cartButton.dataset.productId;
       const productImage = cartButton.dataset.productImage;
+      const productName = cartButton.dataset.productName;
+      const productPrice = cartButton.dataset.productPrice;
+
       let matchingItem;
+      const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`);
+      const quantity = Number(quantitySelector.value);
+
+
+      //new code
+      const response = await fetch('http://localhost:3000/cart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ productId, productName, productPrice, quantity, productImage })
+      });
+
+      const data = await response.json();
+
+      document.getElementById('message')
+        .innerHTML = data.message || data.error;
+
 
       cart.forEach((item) => {
         if(productId === item.productId){
@@ -67,8 +90,8 @@ document.querySelectorAll('.js-add-to-cart')
       
       })
       
-      const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`);
-      const quantity = Number(quantitySelector.value);
+      // const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`);
+      // const quantity = Number(quantitySelector.value);
 
       if (matchingItem) {
         matchingItem.quantity += 1;      
@@ -76,7 +99,9 @@ document.querySelectorAll('.js-add-to-cart')
         cart.push ({
             productId: productId,
             quantity: quantity,
-            productImage: productImage
+            productImage: productImage,
+            productName: productName,
+            productPrice: productPrice
           })
       }
 

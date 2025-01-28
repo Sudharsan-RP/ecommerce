@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>db connection checking</h1>
+  <input type="text" placeholder="name" id="name">
+  <input type="number" placeholder="number" id="quantity">
+  <p id="image">images</p>
+  <button type="submit" id="submit">add</button>
+
+  <div id="message"></div>
+
+  <script>
+    document.getElementById('submit').addEventListener('click', async(e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const quantity = document.getElementById('quantity').value;
+      const image = document.getElementById('image').textContent;
+
+      const response = await fetch('http://localhost:3000/cart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, quantity, image })
+      });
+
+      const data = await response.json();
+      document.getElementById('message')
+        .innerHTML = data.message || data.error
+    })
+  </script>
+</body>
+</html>
