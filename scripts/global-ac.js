@@ -1,6 +1,14 @@
 import { cart } from './cart.js';
 import { products } from './products.js'
 
+// to get a total quantity from database
+const response = await fetch('http://localhost:3000/cart');
+const cartItems = await response.json();
+const data = cartItems.cartItems;
+
+document.querySelector('.total').innerHTML = data.length;
+
+//add product dynamically
 let productHtml = '';
 
 products.forEach((product) => {
@@ -137,4 +145,22 @@ document.querySelector('.service').addEventListener('click', () => {
     document.querySelector('.header').classList.add('extra-width')
 })
 
+document.querySelector('.contact').addEventListener('click', () => {
+  document.querySelector('.list')
+    .innerHTML = 
+    `
+      <div class="contact-list">
+        <a href="tel: +9150845925"><div class="phone">call</div></a>
+        <div class="facebook">facebook</div>
+        <div class="insta">insta</div>
+        <div class="twitter">twitter</div>
+        <a href="mailto: sudharsanrp2905@gmail.com"><div class="mail">mail</div></a>
+      </div>
+     `
+     
+  // let getClass = document.querySelector('.list')
+  // getClass.getAttribute('class') === "list" 
+  //   ? getClass.classList.remove('list')
+  //     : getClass
+})
 

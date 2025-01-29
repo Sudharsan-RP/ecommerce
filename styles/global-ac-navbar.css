@@ -172,3 +172,31 @@ nav {
 .extra-width {
   min-height: 150px;
 }
+
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  color: black;
+  margin-top: 40px;
+  margin-left: 10pxpx;
+  padding: 10px 10px;
+  background-color: rgb(255, 255, 255);
+  gap: 20px;
+  border-radius: 5px;
+  min-height: 19rem;
+  width: 150px;
+  border-radius: 0px 5px 5px 5px;
+}
+
+.contact-list div {
+  margin-left: 10px;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.aboutus {
+  text-decoration: none;
+  color: inherit;
+}
+
