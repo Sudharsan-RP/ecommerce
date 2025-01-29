@@ -15,7 +15,8 @@ async function fetchCartItems() {
      let cartHtml = '';
 
     data.forEach((item) => {
-      console.log(item);
+      console.log(item._id);
+      // const id = item._id.toString();
 
       cartHtml = 
       `<div class="bottom-container">
@@ -26,9 +27,9 @@ async function fetchCartItems() {
                     ${item.productName}
                 </div>
                 <div class="quantity">
-                    <button> - </button>
+                    <button onclick="removeItem(${item._id})"> - </button>
                     <p class="count"> ${item.quantity} </p>
-                    <button> + </button>
+                    <button onclick="increaseQuantity(${item._id}, ${item.quantity})"> + </button>
                 </div>
             </div>
         </div>
@@ -36,7 +37,6 @@ async function fetchCartItems() {
             <p>${item.productPrice}</p>
         </div>
       `
-     
         
       document.querySelector('.bottom')
         .innerHTML += cartHtml;
@@ -54,7 +54,7 @@ async function increaseQuantity(itemId, currentQuantity) {
   const newQuantity = currentQuantity + 1;
 
   try {
-    const response = await fetch(`http://localhost:3000/cart/${itemId}`, {
+    const response = await fetch(`http://localhost:3000/cart/product/${itemId}`, {
       method: "PUT",
       headers: {
         'Content-Type': 'application/json'
@@ -71,6 +71,7 @@ async function increaseQuantity(itemId, currentQuantity) {
     
     alert('quantity updated successfully');
     fetchCartItems();
+    document.querySelector('.message').innerHTML = result.message || result.error;
   } catch (err) {
     console.log(err.message);
   }
@@ -78,7 +79,7 @@ async function increaseQuantity(itemId, currentQuantity) {
 
 async function removeItem(id) {
   try {
-    const response = await fetch(`http://localhost:3000/cart/${ id }`, {
+    const response = await fetch(`http://localhost:3000/cart/product/${ id }`, {
       method: 'DELETE'
     });
   
@@ -87,7 +88,7 @@ async function removeItem(id) {
       throw new Error(errorData.error)
     }
   
-    const result = await response.json();
+    await response.json();
     fetchCartItems();
     alert('item removed successfully');
   }catch(err) {

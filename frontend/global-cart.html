@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>global cart page</title>
-  <link rel="stylesheet" href="./styles/global-ac-navbar.css">
-  <link rel="stylesheet" href="./styles/global-ac-cart.css">
+  <link rel="stylesheet" href="../styles/global-ac-navbar.css">
+  <link rel="stylesheet" href="../styles/global-ac-cart.css">
 </head>
 <body>
     <div class="header">
@@ -15,27 +15,29 @@
         <div class="navbar">
           <nav>
             <div class="title"> 
-              <span class="span1"> global </span> 
-              <span class="span2">air condition</span>
+              <a href="global-home.html">
+                <span class="span1"> global </span> 
+                <span class="span2">air condition</span>
+              </a>
             </div>
-            <div class="searchbar">
+            <div class="searchbar" style="margin-top: 15px;">
               <div>
                 <input type="search" placeholder="search for products, brands and more">
               </div>
               <div>
-                <img src="./images/nav-imgs/search.png" width="40px" height="40px">
+                <img src="../images/nav-imgs/search.png" width="40px" height="40px">
               </div>
             </div>
   
-            <div class="login-button">
+            <div class="login-button" style="margin-top: 10px;">
               <button> login </button>
             </div>
             <div class="lists">
                 <div class="service">
-                  <img src="./images/nav-imgs/service-logo.png" width="40px" height="40px">
+                  <img src="../images/nav-imgs/service-logo.png" width="38px" height="38px">
                 </div>
-                <div class="about">about</div>
-                <div class="contact">contact</div>
+                <div class="about" style="margin-top: 5px;">about</div>
+                <div class="contact" style="margin-top: 5px;">contact</div>
             </div>
           </nav>
         </div>
@@ -73,10 +75,11 @@
 
     <div class="order-summary">
         <p>total products</p>
-        <div id="total-quantity">3</div>
+        <div id="total-quantity"> 0 </div>
         <button class="buy"> proceed to buy </button>
     </div> 
+    <div class="message"></div>
   </div>
-  <script src="./scripts/cartdetails.js"></script>
+  <script src="../scripts/cartdetails.js"></script>
 </body>
 </html>

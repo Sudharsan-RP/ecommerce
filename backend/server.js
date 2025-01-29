@@ -2,6 +2,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyparser = require('body-parser');
 const cors = require('cors');
+const bcrypt = require('bcryptjs');
+const validator = require('validator');
+const crypto = require('crypto');
+
 const app = express();
 const PORT = 3000;
 
@@ -17,7 +21,143 @@ mongoose.connect('mongodb://localhost:27017/cart-products')
   .then(() => {console.log('db connected successfully')})
   .catch((err) => {console.error(err.message)});
 
-//create a schema
+//create a user schema
+const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+  },
+  age: {
+    type: Number,
+    min: 18 
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    validate: [validator.isEmail, 'please enter a valid email']
+  },
+  password: {
+    type: String,
+    required: true,
+    minLength: [8, 'password must be atleast 8 charectors long']
+  },
+  cPassword: {
+    type: String,
+    required: true,
+    minLength: [8, 'password must be atleast 8 charectors long']
+  },
+  mobileNo: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  otp: {
+    type: String,
+    default: null
+  },
+  isVerified: {
+    type: Boolean,
+    default: false
+  }
+});
+
+const User = mongoose.model('User', userSchema);
+
+app.post('/signup', async(req, res) => {
+  const { name, age, email, password, cPassword, mobileNo } = req.body;
+
+  try {
+    //check email is valid
+
+    if (!validator.isEmail(email)) {
+      return res.status(400).json({
+        error: 'please enter valid email'
+      })
+    }
+
+    //check password is valid
+
+    if (password.length < 8) {
+      return res.status(400).json({error: 'password must be atleast 8 charectors long'})
+    }
+
+    if (password !== cPassword) {
+      return res.status(400).json({ error: "password doesn't match" })
+    }
+
+    //mobile no validation
+
+    if (mobileNo.length < 10 && mobileNo.length > 10) {
+      return res.status(400).json({error: 'please enter a valid mobile number'})
+    }
+
+    //check if user already exists
+
+    const existUser = await User.findOne({email});
+    if (existUser) {
+      return res.status(400).json({ error: 'user already exists' })
+    }
+
+    //hash the password
+
+    const hashPassword = await bcrypt.hash(password, 10);
+    const hashcPassword = await bcrypt.hash(cPassword, 10);
+
+    //create new user
+
+    const user = new User({ name, age, email, password: hashPassword, cPassword: hashcPassword, mobileNo
+    });
+    await user.save();
+
+    res.status(201).json({
+      message: "signup successfully",
+      name: name,
+      age: age,
+      email: email,
+      mobileNumber: mobileNo
+    });
+  } catch (err) {
+    res.status(500).json({
+      error: err.message
+    })
+  }
+});
+
+//login page
+
+app.post('/login', async(req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    //find user by email
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ error: 'invalid details' })
+    }
+
+
+    //compare passwords
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ error: "password doesn't match"})
+    }
+
+    res.status(200).json({
+      message: 'login successfull'
+    })
+  } catch(err) {
+    res.status(500).json({
+      error: err.message
+    })
+  }
+
+});
+
+
+
+
+//create a product schema
 const productSchema = new mongoose.Schema({
   productId: {
     type: String,
@@ -74,47 +214,77 @@ app.get('/cart', async(req, res) => {
   }
 });
 
-app.put('/cart/:id', async(req, res) => {
+// app.put('/cart/:id', async(req, res) => {
 
-  const { id } = req.params;
+//   const { id } = req.params;
 
-  //validate the item id
-  if(!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({
-      error: 'invalid item id'
-    })
-  }
+//   //validate the item id
+//   if(!mongoose.Types.ObjectId.isValid(id)) {
+//     return res.status(400).json({
+//       error: 'invalid item id'
+//     })
+//   }
 
-  //validate the quantity
-  if(typeof quantity !== 'number' || quantity < 1) {
-    return res.status(400).json({
-      error: 'invalid item id'
-    })
-  }
-  const { quantity } = req.body;
+//   //validate the quantity
+//   if(typeof quantity !== 'number' || quantity < 1) {
+//     return res.status(400).json({
+//       error: 'invalid item id'
+//     })
+//   }
+//   const { quantity } = req.body;
+//   try {
+//     const updatedItem = await CartProduct.findByIdAndUpdate(
+//       id,
+//       { $set: { quantity }},
+//       { new: true }
+//     );
+
+//     if(!updatedItem) {
+//       return res.status(404).json({
+//         error: 'item not found'
+//       })
+//     };
+//     res.status(200).json({
+//       message: 'Quantity updated successfully', updatedItem
+//     })
+//   } catch(err) {
+//     res.status(500).json({
+//       error: err.message
+//     });
+//   };
+// });
+
+
+//update product
+app.put('/cart/product/:id', async(req, res) => {
   try {
-    const updatedItem = await CartProduct.findByIdAndUpdate(
-      id,
-      { $set: { quantity }},
-      { new: true }
+    const { id } = req.params;
+    const { quantity } = req.body;
+
+    const update = await CartProduct.findByIdAndUpdate(
+       id,
+       { $set: {quantity: 1} },
+       { new: true }
     );
 
-    if(!updatedItem) {
-      return res.status(404).json({
-        error: 'item not found'
+    if(!update) {
+      res.status(404).json({
+        message: 'product not found'
       })
-    };
+    }
     res.status(200).json({
-      message: 'Quantity updated successfully', updatedItem
+      message: 'product updated successfully'
     })
-  } catch(err) {
+  } catch (error) {
     res.status(500).json({
-      error: err.message
-    });
-  };
-});
+      message: error.message
+    })
+  }
+})
 
-app.delete('/cart/:id', async(req, res) => {
+
+//delete product
+app.delete('/cart/product/:id', async(req, res) => {
   const { id } = req.params;
 
   try {
@@ -123,8 +293,9 @@ app.delete('/cart/:id', async(req, res) => {
       return res.status(404).json({
         error: 'item not found'
       })
-    };res.status(200).json({
-      message: 'Quantity updated successfully', updatedItem
+    };
+    res.status(200).json({
+      message: 'item removed',
     })
   } catch(err) {
     res.status(500).json({

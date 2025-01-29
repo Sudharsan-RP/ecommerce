@@ -39,7 +39,7 @@ products.forEach((product) => {
                 <option value="5"> 5 </option>
               </select>
             </div>
-            <div id="message">message</div>
+            <div id="message"></div>
             <div class="button">
               <button type="submit" class="js-add-to-cart" data-product-id = ${product.id} data-product-image = ${product.image} data-product-name = ${product.name} data-product-price = ${product.price}>
                 add to cart
