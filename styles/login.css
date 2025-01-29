@@ -23,7 +23,7 @@ body {
   border: 1px solid rgb(124, 121, 121);
   background-color: transparent;
   width: 400px;
-  height: 350px;
+  height: 400px;
   background-color: black;
   color: white;
   border-radius: 5px;
@@ -39,6 +39,7 @@ body {
   border-radius: 3px;
   background-color: transparent;
   color: white;
+  font-size: 16px;
 }
 
 .title {
@@ -57,7 +58,7 @@ body {
 }
 
 #json {
-  margin-left: 90px;
+  margin-left: 110px;
   font-size: 18px;
   width: 200px;
   color: red;

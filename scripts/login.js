@@ -14,8 +14,11 @@ document.getElementById('login').addEventListener('click', async(e) => {
 
   const result = await response.json(); 
   document.getElementById('json')
-    .innerHTML = result.message || result.error
-});
+    .innerHTML = result.message || result.error;
+
+    document.getElementById('email').value = '';
+    document.getElementById('password').value = '';
+  });
 
 function toggle() {
   let show = document.getElementById('password')

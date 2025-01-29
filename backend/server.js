@@ -5,6 +5,7 @@ const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const validator = require('validator');
 const crypto = require('crypto');
+const path = require('path');
 
 const app = express();
 const PORT = 3000;
@@ -25,10 +26,12 @@ mongoose.connect('mongodb://localhost:27017/cart-products')
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
+    required: true
   },
   age: {
     type: Number,
-    min: 18 
+    min: 18,
+    required: true
   },
   email: {
     type: String,
@@ -78,7 +81,7 @@ app.post('/signup', async(req, res) => {
     //check password is valid
 
     if (password.length < 8) {
-      return res.status(400).json({error: 'password must be atleast 8 charectors long'})
+      return res.status(400).json({error: 'password must be atleast 8 charectors'})
     }
 
     if (password !== cPassword) {
@@ -88,7 +91,7 @@ app.post('/signup', async(req, res) => {
     //mobile no validation
 
     if (mobileNo.length < 10 && mobileNo.length > 10) {
-      return res.status(400).json({error: 'please enter a valid mobile number'})
+      return res.status(400).json({error: 'enter a valid mobile number'})
     }
 
     //check if user already exists
@@ -115,7 +118,7 @@ app.post('/signup', async(req, res) => {
       age: age,
       email: email,
       mobileNumber: mobileNo
-    });
+    })
   } catch (err) {
     res.status(500).json({
       error: err.message

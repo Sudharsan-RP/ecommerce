@@ -20,6 +20,17 @@ document.getElementById('signup').addEventListener('click', async(e) => {
   document.getElementById('json')
     .innerHTML = data.message || data.error;
 
+  // let passwordMisMatch = document.getElementById('json').innerHTML;
+  // if(passwordMisMatch === "password doesn't match") {
+  //   document.getElementById('cPassword').classList.add('incorrect');
+  // }
+  
+    document.getElementById('name').value = '';
+    document.getElementById('age').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('password').value = '';
+    document.getElementById('cPassword').value = '';
+    document.getElementById('mobileNo').value = '';
   // data.forEach((element) => {
   //   document.getElementById('data').innerHTML += element; 
   // });
@@ -35,6 +46,14 @@ document.getElementById('signup').addEventListener('click', async(e) => {
 
 document.getElementById('show').addEventListener('click', () => {
   let password = document.getElementById('password')
+  const type = password.getAttribute('type') === 'password'
+    ? 'text' 
+      : 'password';
+  password.setAttribute('type', type)
+})
+
+document.querySelector('.show').addEventListener('click', () => {
+  let password = document.getElementById('cPassword')
   const type = password.getAttribute('type') === 'password'
     ? 'text' 
       : 'password';
