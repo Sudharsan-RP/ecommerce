@@ -123,4 +123,18 @@ document.querySelectorAll('.js-add-to-cart')
   
 });
 
+document.querySelector('.service').addEventListener('click', () => {
+  document.querySelector('.div')
+    .innerHTML = `
+       <a href="serviceform.html" target="_blank">
+       <button class="div1">booking</button>
+       </a>
+
+       <a href="serviceProducts.html" target="_blank">
+       <button class="div2">service order</button>
+       </a>             
+    `
+    document.querySelector('.header').classList.add('extra-width')
+})
+
 

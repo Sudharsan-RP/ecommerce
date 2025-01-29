@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs');
 const validator = require('validator');
 const crypto = require('crypto');
 const path = require('path');
+const { type } = require("os");
 
 const app = express();
 const PORT = 3000;
@@ -21,6 +22,87 @@ app.use(cors());
 mongoose.connect('mongodb://localhost:27017/cart-products')
   .then(() => {console.log('db connected successfully')})
   .catch((err) => {console.error(err.message)});
+
+//create service schema
+const serviceSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  productName: {
+    type: String,
+    required: true
+  },
+  productComplaint: {
+    type: String,
+    required: false
+  },
+  street: {
+    type: String,
+    required: true
+  },
+   district: {
+    type: String,
+    required: true
+   },
+   pincode: {
+     type: Number,
+     required: true
+    },
+    mobileNo: {
+     type: Number,
+     required: true
+  }
+})
+
+const Service = mongoose.model('Service', serviceSchema);
+
+app.post('/service', async(req, res) => {
+
+  const { name, productName, productComplaint, address, street, district, pincode, mobileNo } = req.body;
+  try {
+    if (mobileNo.length < 10 && mobileNo.length > 10) {
+      return res.status(400).json({error: 'enter a valid mobile number'})
+    }
+
+    if (pincode.length < 6 && pincode.length > 6) {
+      return res.status(400).json({error: 'enter a valid mobile number'})
+    }
+
+    // const existUser = await Service.findOne({mobileNo});
+    // if (existUser) {
+    //   return res.status(400).json({ error: 'user already exists' })
+    // }
+
+    const service = new Service({ name, productName, productComplaint, address, street, district, pincode, mobileNo });
+    await service.save();
+
+    res.status(201).json({
+      message: 'details saved successfully'
+    })
+
+  } catch (error) {
+    res.status(500).json({
+      message: error.message
+    })
+  }
+})
+
+app.get('/service', async(req, res) => {
+  try {
+    const serviceDetails = await Service.find();
+
+    res.status(200).json({
+      serviceDetails
+    })
+  } catch(err) {
+    res.status(500).json({ error: err.message })
+  }
+});
+
+
+
+
 
 //create a user schema
 const userSchema = new mongoose.Schema({

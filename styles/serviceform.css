@@ -1,0 +1,73 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(33, 41, 41);
+  padding: 20px 50px;
+  letter-spacing: 1.5px;
+  border-radius: 5px;
+}
+
+.container div {
+  font-size: 20px;
+  text-transform: capitalize;
+}
+
+input {
+  padding: 10px;
+  width: 300px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+input::placeholder {
+  text-transform: capitalize;
+  font-size: 14px;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+label {
+  color: white;
+}
+
+.container .title {
+  font-size: 24px;
+  text-transform: uppercase;
+  color: white;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#submit {
+  padding: 8px 20px;
+  float: right;
+  border-radius: 5px;
+  font-size: 16px;
+  text-transform: capitalize;
+  font-weight: 550;
+}
+
+#home {
+  padding: 8px 20px;
+  float: left;
+  border-radius: 5px;
+  font-size: 16px;
+  text-transform: capitalize;
+  font-weight: 550;
+}
+
+.buttons {
+  margin-top: 20px;
+  font-size: 16px;
+}
