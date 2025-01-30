@@ -15,7 +15,7 @@ async function fetchCartItems() {
       `
       <div class="user-info">
         <div class="user"> <span>name</span> : ${id.name} </div>
-        <div class="product-name"><span>product name : </span>${id.productName} </div>
+        <div class="product-name"><span>product details : </span>${id.productName} </div>
         <div class="complaint"><span>complaint : </span>${id.productComplaint}</div>
         <div class="address">
           <div class="street"><span>street :</span> ${id.street}</div>

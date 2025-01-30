@@ -64,10 +64,12 @@ body {
   text-align: center;
   
 }
-.image img {
+
+/* .image img {
   height: 300px;
   width: 150px;
-}
+} */
+ 
 .rating {
   display: flex;
   align-items: center;

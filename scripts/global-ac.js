@@ -15,7 +15,7 @@ products.forEach((product) => {
   productHtml = `
  <div class="product-container">
           <div class="image">
-            <a href="global-product-info.html" target="_balnk"><img src="${product.image}"></a>
+            <a href="global-product-info.html" target="_balnk" height="${product.height}" width="${product.width}"><img src="${product.image}"></a>
           </div>
 
           <div class="product-details">
@@ -123,13 +123,14 @@ document.querySelectorAll('.js-add-to-cart')
        }
         document.querySelector('.total')
             .innerHTML = cartQuantity;
-        
       })
 
     })
   })
   
 });
+
+
 
 document.querySelector('.service').addEventListener('click', () => {
   document.querySelector('.div')

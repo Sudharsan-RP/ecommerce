@@ -6,9 +6,11 @@ async function fetchCartItems() {
     console.log(cartItems.cartItems);
 
     const data = cartItems.cartItems;
-    const bottom = document.querySelector('.bottom');
+    const message = document.querySelector('.message');
+    const productInfo = document.querySelector('.product-info');
      if(data.length === 0) {
-      bottom.innerHTML = `<h3> your cart is empty </h3>`
+        productInfo.innerHTML = '';
+      message.innerHTML = `<h3> your cart is empty </h3>`
       return;
      }
     

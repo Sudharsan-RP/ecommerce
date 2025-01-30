@@ -25,14 +25,14 @@
 .top {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    margin-top: -120px;
+    margin-top: -10px;
 }
 
 .bottom {
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-content: center;
-    margin-top: -80px;
+    margin-top: -1px;
 }
 
 .bottom-container {
@@ -104,7 +104,9 @@
     align-content: flex-end;
     border-radius: 5px;
     margin-top: 10px;
-    position: sticky;
+    position: fixed;
+    right: 150px;
+    top: 200px;
 }
 
 .buy {
@@ -131,3 +133,11 @@
     left: 120px;
     font-size: 38px;
 }
+.message {
+    position: absolute;
+    left: 400px;
+    top: 350px;
+    text-transform: capitalize;
+    text-decoration: overline;
+}
+

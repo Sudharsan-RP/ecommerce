@@ -20,4 +20,12 @@ document.getElementById('submit').addEventListener('click', async(e) => {
   const result = await response.json();
   document.getElementById('json')
     .innerHTML = result.message || result.error;
+
+  document.getElementById('name').value = '';
+  document.getElementById('productName').value = '';
+  document.getElementById('street').value = '';
+  document.getElementById('complaint').value = '';
+  document.getElementById('district').value = '';
+  document.getElementById('pincode').value = '';
+  document.getElementById('mobileNo').value = '';
 })
