@@ -4,7 +4,6 @@ const bodyparser = require('body-parser');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const validator = require('validator');
-const crypto = require('crypto');
 const path = require('path');
 const { type } = require("os");
 

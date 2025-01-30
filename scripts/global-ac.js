@@ -27,7 +27,7 @@ products.forEach((product) => {
   
             <div class="rating">
               <div class="stars">&#9733; &#9733; &#9733; &#9733; ${product.rating.stars}</div>
-              <div class="counts">&#10555; ${product.rating.reviews}</div>
+              <div class="counts">&#10555; ${product.rating.reviews} reviews</div>
             </div>
             <div class="bought">
               20+ bought in past month
