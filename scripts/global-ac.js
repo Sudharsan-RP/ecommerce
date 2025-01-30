@@ -159,9 +159,10 @@ document.querySelector('.contact').addEventListener('click', () => {
       </div>
      `
      
-  // let getClass = document.querySelector('.list')
-  // getClass.getAttribute('class') === "list" 
-  //   ? getClass.classList.remove('list')
-  //     : getClass
+//   let getClass = document.querySelector('.list');
+//   const addClass = getClass.getAttribute('class') === "list"
+//    ? "display"
+//       : "list";
+//   getClass.setAttribute('class', addClass);
 })
 

@@ -97,4 +97,25 @@ async function removeItem(id) {
     alert(err.message);
   }
 }
+
+
+document.querySelector('.contact').addEventListener('click', () => {
+    document.querySelector('.list')
+      .innerHTML = 
+      `
+        <div class="contact-list">
+          <a href="tel: +9150845925"><div class="phone">call</div></a>
+          <div class="facebook">facebook</div>
+          <div class="insta">insta</div>
+          <div class="twitter">twitter</div>
+          <a href="mailto: sudharsanrp2905@gmail.com"><div class="mail">mail</div></a>
+        </div>
+       `
+       
+  //   let getClass = document.querySelector('.list');
+  //   const addClass = getClass.getAttribute('class') === "list"
+  //    ? "display"
+  //       : "list";
+  //   getClass.setAttribute('class', addClass);
+  })
 window.onload = fetchCartItems;
