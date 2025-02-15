@@ -346,7 +346,7 @@ app.put('/cart/product/:id', async(req, res) => {
 
     const update = await CartProduct.findByIdAndUpdate(
        id,
-       { $set: {quantity: 1} },
+       { quantity },
        { new: true }
     );
 
@@ -356,6 +356,7 @@ app.put('/cart/product/:id', async(req, res) => {
       })
     }
     res.status(200).json({
+      quantity,
       message: 'product updated successfully'
     })
   } catch (error) {

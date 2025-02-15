@@ -1,12 +1,6 @@
 import { cart } from './cart.js';
 import { products } from './products.js'
 
-// to get a total quantity from database
-const response = await fetch('http://localhost:3000/cart');
-const cartItems = await response.json();
-const data = cartItems.cartItems;
-
-document.querySelector('.total').innerHTML = data.length;
 
 //add product dynamically
 let productHtml = '';
@@ -76,7 +70,7 @@ document.querySelectorAll('.js-add-to-cart')
       const quantity = Number(quantitySelector.value);
 
 
-      //new code
+      //post the data in db
       const response = await fetch('http://localhost:3000/cart', {
         method: 'POST',
         headers: {
@@ -90,30 +84,6 @@ document.querySelectorAll('.js-add-to-cart')
       document.getElementById('message')
         .innerHTML = data.message || data.error;
 
-
-      cart.forEach((item) => {
-        if(productId === item.productId){
-          matchingItem = item; 
-        }
-      
-      })
-      
-      // const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`);
-      // const quantity = Number(quantitySelector.value);
-
-      if (matchingItem) {
-        matchingItem.quantity += 1;      
-      }else {
-        cart.push ({
-            productId: productId,
-            quantity: quantity,
-            productImage: productImage,
-            productName: productName,
-            productPrice: productPrice
-          })
-      }
-
-      console.log(cart);
       let cartQuantity = 0;
 
       cart.forEach((total) => {

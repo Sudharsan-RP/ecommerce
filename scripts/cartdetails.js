@@ -1,3 +1,4 @@
+//display the datas
 
 async function fetchCartItems() {
   try {
@@ -17,8 +18,6 @@ async function fetchCartItems() {
      let cartHtml = '';
 
     data.forEach((item) => {
-      console.log(item._id);
-      // const id = item._id.toString();
 
       cartHtml = 
       `<div class="bottom-container">
@@ -29,9 +28,9 @@ async function fetchCartItems() {
                     ${item.productName}
                 </div>
                 <div class="quantity">
-                    <button onclick="removeItem(${item._id})"> - </button>
-                    <p class="count"> ${item.quantity} </p>
-                    <button onclick="increaseQuantity(${item._id}, ${item.quantity})"> + </button>
+                    <button onclick="decreaseQuantity('${item._id}')"> - </button>
+                    <p class="count count-${item._id}"> ${item.quantity} </p>
+                    <button onclick="increaseQuantity('${item._id}')"> + </button>
                 </div>
             </div>
         </div>
@@ -43,18 +42,29 @@ async function fetchCartItems() {
       document.querySelector('.bottom')
         .innerHTML += cartHtml;
 
-      const total = data.length;
-      console.log(total)
-      document.getElementById('total-quantity').innerHTML = total;
+      total(); //show total when data feching
     })
   } catch(err) {
     console.log('error fetching cart items :', err);
   }
 };
 
-async function increaseQuantity(itemId, currentQuantity) {
-  const newQuantity = currentQuantity + 1;
+//show total
+function total() {
+  let totalQuantity = document.querySelectorAll('.count');
+  let total = 0;
+  totalQuantity.forEach((item) => {
+    total += parseInt(item.textContent);
+  });
+  document.getElementById('total-quantity').innerText = total;
+}
 
+
+//increase quantity
+async function increaseQuantity(itemId) {
+  let quantityElement = document.querySelector(`.count-${itemId}`);
+  let currentQuantity = parseInt(quantityElement.textContent);
+  let newQuantity = currentQuantity + 1;
   try {
     const response = await fetch(`http://localhost:3000/cart/product/${itemId}`, {
       method: "PUT",
@@ -70,16 +80,55 @@ async function increaseQuantity(itemId, currentQuantity) {
     }
 
     const result = await response.json();
+    console.log('edited', result);
     
-    alert('quantity updated successfully');
-    fetchCartItems();
-    document.querySelector('.message').innerHTML = result.message || result.error;
+    // alert('quantity updated successfully');
+    quantityElement.textContent = newQuantity;
+
+    total() //update total when quantity increase
+
   } catch (err) {
     console.log(err.message);
   }
 }
 
-async function removeItem(id) {
+//decrease quantity
+async function decreaseQuantity(itemId) {
+  let quantityElement = document.querySelector(`.count-${itemId}`);
+  let currentQuantity = parseInt(quantityElement.textContent);
+  let newQuantity = currentQuantity - 1;
+  try {
+    
+    if(newQuantity >= 1) {
+      const response = await fetch(`http://localhost:3000/cart/product/${itemId}`, {
+        method: "PUT",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ quantity: newQuantity })
+      });
+  
+      if(!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'failed to update quantity')
+      }
+  
+      const result = await response.json();
+      console.log('edited', result);
+      
+      // alert('quantity updated successfully');
+      quantityElement.textContent = newQuantity;
+  
+      total() //update total when quantity increase
+    }else {
+      deleteItem(itemId);
+    };
+  } catch (err) {
+    console.log(err.message);
+  }
+}
+
+async function deleteItem(id) {
   try {
     const response = await fetch(`http://localhost:3000/cart/product/${ id }`, {
       method: 'DELETE'
@@ -90,7 +139,9 @@ async function removeItem(id) {
       throw new Error(errorData.error)
     }
   
-    await response.json();
+    document.querySelector('.bottom')
+        .innerHTML = " ";
+
     fetchCartItems();
     alert('item removed successfully');
   }catch(err) {
