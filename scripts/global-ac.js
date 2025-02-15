@@ -85,6 +85,11 @@ document.querySelectorAll('.js-add-to-cart')
 
       document.getElementById('message')
         .innerHTML = data.message || data.error;
+
+      // Disable button after adding to cart
+      cartButton.setAttribute('disabled', 'true');
+      cartButton.innerText = 'Added to Cart'; // Optional: Change button text
+      cartButton.style.backgroundColor = 'gray'; // Optional: Change button color
   
     })
   })
@@ -110,6 +115,25 @@ const updateCartQuantity = async () => {
 
 // Run once on page load to update cart count
 updateCartQuantity();
+
+
+async function disableAddedProducts() {
+  const response = await fetch('http://localhost:3000/cart');
+  const cartItems = await response.json();
+  const cartProducts = cartItems.cartItems.map(item => item.productId);
+
+  document.querySelectorAll('.js-add-to-cart').forEach((cartButton) => {
+    const productId = cartButton.dataset.productId;
+    if (cartProducts.includes(productId)) {
+      cartButton.setAttribute('disabled', 'true');
+      cartButton.innerText = 'Added to Cart';
+      cartButton.style.backgroundColor = 'gray';
+    }
+  });
+}
+
+// Call function on page load
+disableAddedProducts();
 
 
 
