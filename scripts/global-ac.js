@@ -1,4 +1,4 @@
-import { cart } from './cart.js';
+// import { cart } from './cart.js';
 import { products } from './products.js'
 
 
@@ -81,24 +81,35 @@ document.querySelectorAll('.js-add-to-cart')
 
       const data = await response.json();
 
+      updateCartQuantity();  //update total cart when product added
+
       document.getElementById('message')
         .innerHTML = data.message || data.error;
-
-      let cartQuantity = 0;
-
-      cart.forEach((total) => {
-       cartQuantity += total.quantity;
-       if (cartQuantity > 0) {
-        document.querySelector('.logo-cart').classList.add('cart-logo');
-       }
-        document.querySelector('.total')
-            .innerHTML = cartQuantity;
-      })
-
+  
     })
   })
   
 });
+
+const updateCartQuantity = async () => {
+  try {
+    // Fetch total cart data from DB
+    const response = await fetch('http://localhost:3000/cart');
+    const totalData = await response.json();
+    const totalCart = totalData.cartItems;
+
+    // Calculate total quantity from all items in the cart
+    let totalQuantity = totalCart.reduce((sum, item) => sum + item.quantity, 0);
+
+    // Update cart quantity display
+    document.querySelector('.total').innerHTML = totalQuantity;
+  } catch (error) {
+    console.error('Error fetching cart data:', error);
+  }
+};
+
+// Run once on page load to update cart count
+updateCartQuantity();
 
 
 
