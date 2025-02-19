@@ -18,7 +18,7 @@ app.use(bodyparser.urlencoded({
 app.use(cors());
 
 //db connection
-mongoose.connect('mongodb://localhost:27017/cart-products')
+mongoose.connect('mongodb://localhost:27017/global-ac')
   .then(() => {console.log('db connected successfully')})
   .catch((err) => {console.error(err.message)});
 
@@ -245,22 +245,24 @@ app.post('/login', async(req, res) => {
 const productSchema = new mongoose.Schema({
   productId: {
     type: String,
-    require: true
+    required: true
   },
   productName:{
     type: String,
-    require: true
+    required: true,
+    maxlength: 500 ,
+    trim: true
   },
   productPrice: {
     type: Number
   },
   quantity: {
     type: Number,
-    require: true
+    required: true
   },
   productImage: {
     type: String,
-    require: true
+    required: true
   }
 });
 
@@ -296,46 +298,6 @@ app.get('/cart', async(req, res) => {
     res.status(500).json({ error: err.message })
   }
 });
-
-// app.put('/cart/:id', async(req, res) => {
-
-//   const { id } = req.params;
-
-//   //validate the item id
-//   if(!mongoose.Types.ObjectId.isValid(id)) {
-//     return res.status(400).json({
-//       error: 'invalid item id'
-//     })
-//   }
-
-//   //validate the quantity
-//   if(typeof quantity !== 'number' || quantity < 1) {
-//     return res.status(400).json({
-//       error: 'invalid item id'
-//     })
-//   }
-//   const { quantity } = req.body;
-//   try {
-//     const updatedItem = await CartProduct.findByIdAndUpdate(
-//       id,
-//       { $set: { quantity }},
-//       { new: true }
-//     );
-
-//     if(!updatedItem) {
-//       return res.status(404).json({
-//         error: 'item not found'
-//       })
-//     };
-//     res.status(200).json({
-//       message: 'Quantity updated successfully', updatedItem
-//     })
-//   } catch(err) {
-//     res.status(500).json({
-//       error: err.message
-//     });
-//   };
-// });
 
 
 //update product

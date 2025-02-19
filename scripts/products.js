@@ -2,7 +2,7 @@ export let products = [
   {
     id: 1,
     image: '../images/product-img/panasonic-fridge.webp',
-    name: 'Whirlpool-300 L Frost Free Triple-Door Refrigerator(FP 343D Protton Roy, Alpha Steel)',
+    name: 'Whirlpool 300 L Frost Free Triple-Door Refrigerator(FP 343D Protton Roy, Alpha Steel)',
     rating: {
       stars: '4.5',
       reviews: 10

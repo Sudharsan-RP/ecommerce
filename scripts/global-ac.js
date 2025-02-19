@@ -43,7 +43,7 @@ products.forEach((product) => {
             </div>
             <div id="message"></div>
             <div class="button">
-              <button type="submit" class="js-add-to-cart" data-product-id = ${product.id} data-product-image = ${product.image} data-product-name = ${product.name} data-product-price = ${product.price}>
+              <button type="submit" class="js-add-to-cart" data-product-id = "${product.id}" data-product-image = "${product.image}" data-product-name = "${product.name}" data-product-price = ${product.price}>
                 add to cart
               </button>
               <button>buy now</button>
@@ -64,6 +64,8 @@ document.querySelectorAll('.js-add-to-cart')
       const productImage = cartButton.dataset.productImage;
       const productName = cartButton.dataset.productName;
       const productPrice = cartButton.dataset.productPrice;
+
+      console.log(productName)
 
       let matchingItem;
       const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`);
@@ -138,8 +140,8 @@ disableAddedProducts();
 
 
 document.querySelector('.service').addEventListener('click', () => {
-  document.querySelector('.div')
-    .innerHTML = `
+ let div =  document.querySelector('.div')
+ let html  = `
        <a href="serviceform.html" target="_blank">
        <button class="div1">booking</button>
        </a>
@@ -148,12 +150,14 @@ document.querySelector('.service').addEventListener('click', () => {
        <button class="div2">service order</button>
        </a>             
     `
-    document.querySelector('.header').classList.add('extra-width')
+    document.querySelector('.header').classList.toggle('extra-width');
+
+    div.innerHTML = div.innerHTML === html ? "" : html;
 })
 
 document.querySelector('.contact').addEventListener('click', () => {
-  document.querySelector('.list')
-    .innerHTML = 
+  let list = document.querySelector('.list')
+  let html  = 
     `
       <div class="contact-list">
         <a href="tel: +9150845925"><div class="phone">call</div></a>
@@ -164,10 +168,7 @@ document.querySelector('.contact').addEventListener('click', () => {
       </div>
      `
      
-//   let getClass = document.querySelector('.list');
-//   const addClass = getClass.getAttribute('class') === "list"
-//    ? "display"
-//       : "list";
-//   getClass.setAttribute('class', addClass);
+   list.innerHTML = list.innerHTML === html ? '' : html;
+
 })
 
