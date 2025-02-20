@@ -73,12 +73,12 @@ document.querySelectorAll('.js-add-to-cart')
 
 
       setTimeout(() => {
-        document.querySelector(`.messages`).innerHTML = `<div class="message">${ dummyName } added to cart</div>t`
+        document.querySelector(`.messages`).innerHTML = `<div class="message">${ dummyName } added to cart✔</div>t`
       }, 500);
 
       setTimeout(() => {
         document.querySelector(`.messages`).innerHTML = ` `
-      }, 2000);
+      }, 2500);
 
       let matchingItem;
       const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`);
