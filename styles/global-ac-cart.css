@@ -43,9 +43,16 @@
 
 .details {
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 5px;
     justify-content: space-around;
     align-items: center;
+}
+
+.alert {
+    margin-right: 50px;
+    margin-bottom: 10px;
+    color: green;
+    transition: all o.5s ease;
 }
 
 .quantity {
@@ -93,6 +100,9 @@
 }
 
 .order-summary {
+    position: sticky;
+    top: 30%;
+    align-self: flex-start;
     display: flex;
     flex-direction: column;
     background-color: #ccc;
@@ -133,10 +143,4 @@
     margin: 5px 10px;
     align-self: right;
 }
-/* .message {
-    position: absolute;
-    left: 400px;
-    top: 350px;
-    text-transform: capitalize;
-    text-decoration: overline;
-} */
+

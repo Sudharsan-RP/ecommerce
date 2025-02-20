@@ -99,3 +99,19 @@ body {
 .quantity {
   padding: 5px 0px;
 }
+
+.message {
+    position: fixed;
+    left: 45%;
+    top: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    min-width: 200px;
+    min-height: 80px;
+    z-index: 999;
+    color: rgb(7, 223, 7);
+}
+

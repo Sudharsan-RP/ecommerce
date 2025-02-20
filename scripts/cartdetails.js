@@ -1,5 +1,16 @@
 //display the datas
 
+async function updateTotalPrice () {
+    const response = await fetch('http://localhost:3000/cart');
+    const cartItems = await response.json();
+    data = cartItems.cartItems;
+    let price = data.reduce((acc, item) => {return acc +  item.productPrice * item.quantity }, 0);
+    document.getElementById('total-price').textContent = price;
+}
+
+updateTotalPrice ()
+//display the datas
+
 async function fetchCartItems() {
     try {
         const response = await fetch('http://localhost:3000/cart');
@@ -7,11 +18,13 @@ async function fetchCartItems() {
         console.log(cartItems.cartItems);
 
         const data = cartItems.cartItems;
-        const message = document.querySelector('.message');
+        const bottom = document.querySelector('.bottom');
         const productInfo = document.querySelector('.product-info');
         if (data.length === 0) {
             productInfo.innerHTML = '';
-            message.innerHTML = `<h3> your cart is empty </h3>`
+            document.getElementById('total-quantity').textContent = 0;
+            document.getElementById('total-price').textContent = 0;
+            bottom.innerHTML = `<h3> your cart is empty </h3>`
             return;
         }
 
@@ -32,6 +45,7 @@ async function fetchCartItems() {
                             <p class="count count-${item._id}"> ${item.quantity} </p>
                             <button onclick="increaseQuantity('${item._id}')"> + </button>
                         </div>
+                        <div class="alert alert-${item._id}"></div>
                     </div>
                 </div>
                 <div class="price">
@@ -86,6 +100,14 @@ async function increaseQuantity(itemId) {
         quantityElement.textContent = newQuantity;
 
         total() //update total when quantity increase
+        updateTotalPrice () // update total price
+        setTimeout(() => {
+            document.querySelector(`.alert-${itemId}`).textContent = ' ✔product added '; //toast message
+        }, 500)
+
+        setTimeout(() => {
+            document.querySelector(`.alert-${itemId}`).textContent = ' '; //toast message
+        }, 2000) 
 
     } catch (err) {
         console.log(err.message);
@@ -120,6 +142,16 @@ async function decreaseQuantity(itemId) {
             quantityElement.textContent = newQuantity;
 
             total() //update total when quantity increase
+            updateTotalPrice () // update total price
+
+            setTimeout(() => {
+                document.querySelector(`.alert-${itemId}`).textContent = ' ✔product removed '; //toast message
+            }, 500)
+    
+            setTimeout(() => {
+                document.querySelector(`.alert-${itemId}`).textContent = ' '; //toast message
+            }, 2000)
+
         } else {
             deleteItem(itemId);
         };
@@ -140,10 +172,10 @@ async function deleteItem(id) {
         }
 
         document.querySelector('.bottom')
-            .innerHTML = " ";
+            .innerHTML = ` `;
 
         fetchCartItems();
-        alert('item removed successfully');
+        // alert('item removed successfully');
     } catch (err) {
         alert(err.message);
     }
@@ -168,5 +200,6 @@ document.querySelector('.contact').addEventListener('click', () => {
     //    ? "display"
     //       : "list";
     //   getClass.setAttribute('class', addClass);
-})
+});
+
 window.onload = fetchCartItems;

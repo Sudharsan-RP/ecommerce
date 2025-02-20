@@ -41,9 +41,13 @@ products.forEach((product) => {
                 <option value="5"> 5 </option>
               </select>
             </div>
-            <div id="message"></div>
+
+            <!-- toast message for each product
+            <div class="message message-${product.id}"></div>
+            -->
+
             <div class="button">
-              <button type="submit" class="js-add-to-cart" data-product-id = "${product.id}" data-product-image = "${product.image}" data-product-name = "${product.name}" data-product-price = ${product.price}>
+              <button type="submit" class="js-add-to-cart" data-product-id = "${product.id}" data-product-image = "${product.image}" data-product-name = "${product.name}" data-dummy-name = ${product.name} data-product-price = ${product.price}>
                 add to cart
               </button>
               <button>buy now</button>
@@ -65,7 +69,16 @@ document.querySelectorAll('.js-add-to-cart')
       const productName = cartButton.dataset.productName;
       const productPrice = cartButton.dataset.productPrice;
 
-      console.log(productName)
+      const dummyName = cartButton.dataset.dummyName; // get the name for toast message
+
+
+      setTimeout(() => {
+        document.querySelector(`.messages`).innerHTML = `<div class="message">${ dummyName } added to cart</div>t`
+      }, 500);
+
+      setTimeout(() => {
+        document.querySelector(`.messages`).innerHTML = ` `
+      }, 2000);
 
       let matchingItem;
       const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`);
@@ -84,9 +97,6 @@ document.querySelectorAll('.js-add-to-cart')
       const data = await response.json();
 
       updateCartQuantity();  //update total cart when product added
-
-      document.getElementById('message')
-        .innerHTML = data.message || data.error;
 
       // Disable button after adding to cart
       cartButton.setAttribute('disabled', 'true');
