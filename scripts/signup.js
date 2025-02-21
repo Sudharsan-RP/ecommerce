@@ -16,14 +16,22 @@ document.getElementById('signup').addEventListener('click', async(e) => {
     body: JSON.stringify({ name, age, email, password, cPassword, mobileNo })
   });
 
-  const data = await response.json();
-  document.getElementById('json')
-    .innerHTML = data.message || data.error;
+  const result = await response.json()
+  
+  //toast message
+    document.querySelector('#json')
+        .innerHTML = `<div class="json">${result.message || result.error}</div>`;
 
-  // let passwordMisMatch = document.getElementById('json').innerHTML;
-  // if(passwordMisMatch === "password doesn't match") {
-  //   document.getElementById('cPassword').classList.add('incorrect');
-  // }
+    setTimeout(() => {
+        document.querySelector('#json')
+        .innerHTML = ' ';
+        }, 2000)
+  
+    if(result.status == 'ok') {
+        setTimeout(() =>  window.location.href = 'login.html', 2000);
+        document.querySelector('.json').style.color = 'green'
+    }
+  
   
     document.getElementById('name').value = '';
     document.getElementById('age').value = '';
@@ -51,6 +59,40 @@ document.getElementById('show').addEventListener('click', () => {
       : 'password';
   password.setAttribute('type', type)
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 document.querySelector('.show').addEventListener('click', () => {
   let password = document.getElementById('cPassword')

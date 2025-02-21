@@ -7,83 +7,105 @@
 }
 
 body {
-  background-color: rgb(215, 240, 240);
-  font-family: "Poppins", serif;
-}
-.container {
-  display: grid;
-  grid-template-columns: 500px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  padding: 10px;
-  margin: 10px;
-  row-gap: 20px;
-  border: 1px solid rgb(124, 121, 121);
-  background-color: transparent;
-  width: 400px;
-  height: 400px;
-  background-color: black;
-  color: white;
-  border-radius: 5px;
-  backdrop-filter: blur(5px);
-}
-.container div{
-  margin-left: 35px;
-}
-.container input {
-  padding: 10px;
-  min-width: 280px;
-  border: 1.5px solid rgb(124, 115, 115);
-  border-radius: 3px;
-  background-color: transparent;
-  color: white;
-  font-size: 16px;
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    font-family: "Poppins", serif;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    row-gap: 15px;
+    border: 1px solid rgb(124, 121, 121);
+    background-color: transparent;
+    width: 400px;
+    min-height: 310px;
+    background-color: gainsboro;
+    color: black;
+    border-radius: 5px;
+  }
 
-.title {
-  font-size: 26px;
-  text-transform: capitalize;
-  font-weight: 550;
-}
+  .container div{
+    margin-left: 20px;
+  }
+  .container input {
+    padding: 8px;
+    width: 80%;
+    border: 1.5px solid rgb(124, 115, 115);
+    outline: none;
+    border-radius: 5px;
+    background-color: transparent;
+    color: black;
+    font-size: 16px;
+  }
 
-.login button {
-  padding: 8px;
-  width: 130px;
-  text-align: center;
-  margin-left: 80px;
-  border-radius: 5px;
-  font-size: 16px;
-}
+  .title {
+    font-size: 26px;
+    text-transform: capitalize;
+    font-weight: 500;
+    color: rgb(20, 90, 220);
+    text-align: center;
+  }
+  .login {
+    align-self: center;
+  }
 
-#json {
-  margin-left: 110px;
-  font-size: 18px;
-  width: 200px;
-  color: red;
-}
+  .login button {
+    align-self: center;
+    padding: 8px 10px;
+    width: 130px;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: lightgreen;
+    border: none;
+    text-transform: capitalize;
+  }
 
-.container input::placeholder {
-  color: grey;
-  text-transform: capitalize;
-}
+
+  .container input::placeholder {
+    color: grey;
+    text-transform: capitalize;
+    font-size: 14px;
+  }
+  
 
 label {
   text-transform: capitalize;
-  padding-bottom: 8px;
+  display: block;
 }
 
 
 #show {
-  height: 37px;
-  width: 50px;
-  margin-top: 8px;
-  margin-left: 8px;
-  font-weight: 550;
-  text-transform: capitalize;
-  background-color: rgb(81, 81, 82);
-  color: rgb(29, 24, 19);
-  border-radius: 5px;
-  border-style: solid;
+    margin-left: 5px;
+    border-radius: 5px;
+    background-color: transparent;
+    border: none;
 }
+
+a {
+    color: rgb(20, 90, 220);
+    text-align: center;
+  }
+
+  .para {
+    text-align: center;
+  }
+
+  .json {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 320px;
+    min-height: 100px;
+    border-radius: 5px;
+    padding: 10px;
+    text-wrap: wrap;
+    align-self: center;
+    background-color: aqua;
+    color: red;
+  }

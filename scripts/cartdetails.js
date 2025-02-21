@@ -18,13 +18,13 @@ async function fetchCartItems() {
         console.log(cartItems.cartItems);
 
         const data = cartItems.cartItems;
-        const bottom = document.querySelector('.bottom');
+        const message = document.querySelector('.message');
         const productInfo = document.querySelector('.product-info');
         if (data.length === 0) {
             productInfo.innerHTML = '';
             document.getElementById('total-quantity').textContent = 0;
             document.getElementById('total-price').textContent = 0;
-            bottom.innerHTML = `<h3> your cart is empty </h3>`
+            message.innerHTML = `<h3> your cart is empty </h3>`
             return;
         }
 
@@ -103,7 +103,7 @@ async function increaseQuantity(itemId) {
         updateTotalPrice () // update total price
         setTimeout(() => {
             document.querySelector(`.alert-${itemId}`).textContent = ' ✔product added '; //toast message
-        }, 500)
+        }, 300)
 
         setTimeout(() => {
             document.querySelector(`.alert-${itemId}`).textContent = ' '; //toast message
@@ -146,7 +146,7 @@ async function decreaseQuantity(itemId) {
 
             setTimeout(() => {
                 document.querySelector(`.alert-${itemId}`).textContent = ' ✔product removed '; //toast message
-            }, 500)
+            }, 300)
     
             setTimeout(() => {
                 document.querySelector(`.alert-${itemId}`).textContent = ' '; //toast message

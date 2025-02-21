@@ -5,40 +5,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>global signup page</title>
   <link rel="stylesheet" href="../styles/signup.css">
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+  <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
 </head>
 <body>
   <div class="container">
+    <div id="json">
+        <!--toast msg-->
+    </div>
+    
     <div class="title">
         signup
     </div>
     <div class="name">
-      <label for="name">name </label> <br>
+      <label for="name">name </label>
       <input type="text" placeholder="name" id="name" required>
     </div>
     <div class="age">
-      <label for="age">age </label> <br>
+      <label for="age">age </label>
       <input type="number" placeholder="age" id="age" required>
     </div>
     <div class="email">
-      <label for="email">email </label> <br>
+      <label for="email">email </label>
       <input type="email" id="email" placeholder="email" required>
     </div>
     <div class="password">
-      <label for="password">password </label> <br>
-      <input type="password" placeholder="password" id="password" required>
+      <span>
+        <label for="password">password </label>
+        <input type="password" placeholder="password" id="password" required>
+      </span>
       <button id="show">
-        show
+        <box-icon name='hide' color="black"></box-icon>
       </button>
     </div>
     <div class="cpassword">
-      <label for="cPassword">confirm password </label> <br>
+      <label for="cPassword">confirm password </label>
       <input type="password" placeholder="confirm password" id="cPassword" required>
       <button class="show">
-        show
+        <box-icon name='hide' color="black"></box-icon>
       </button>
     </div>
     <div class="mobileno">
-      <label for="mobileNo">mobile number </label> <br>
+      <label for="mobileNo">mobile number </label>
       <input type="text" placeholder="mobile number" id="mobileNo" required>
     </div>
     <div class="para">
@@ -47,10 +56,7 @@
     <div class="signup">
       <button type="submit" id="signup">signup</button>
     </div>
-
-    <div id="json"></div>
     <!-- <div id="data">data</div> -->
-    
     
   </div>
 

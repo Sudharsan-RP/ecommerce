@@ -194,11 +194,9 @@ app.post('/signup', async(req, res) => {
     await user.save();
 
     res.status(201).json({
-      message: "signup successfully",
-      name: name,
-      age: age,
-      email: email,
-      mobileNumber: mobileNo
+        status: 'ok',
+        message: "signup successfully",
+        user
     })
   } catch (err) {
     res.status(500).json({
@@ -216,7 +214,7 @@ app.post('/login', async(req, res) => {
     //find user by email
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({ error: 'invalid details' })
+      return res.status(400).json({ error: 'user not found' });
     }
 
 
@@ -224,11 +222,12 @@ app.post('/login', async(req, res) => {
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ error: "password doesn't match"})
+      return res.status(400).json({ error: "password doesn't match"});
     }
 
     res.status(200).json({
-      message: 'login successfull'
+        status: 'ok',
+        message: '✔ login successfull'
     })
   } catch(err) {
     res.status(500).json({

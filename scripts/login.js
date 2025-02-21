@@ -13,8 +13,21 @@ document.getElementById('login').addEventListener('click', async(e) => {
   });
 
   const result = await response.json(); 
-  document.getElementById('json')
-    .innerHTML = result.message || result.error;
+
+  //toast message
+  document.querySelector('#json')
+  .innerHTML = `<div class="json">${result.message || result.error}</div>`;
+
+  setTimeout(() => {
+  document.querySelector('#json')
+   .innerHTML = ' ';
+  }, 2000)
+
+    console.log(result.status);
+    if(result.status == 'ok') {
+        setTimeout(() =>  window.location.href = 'global-home.html', 2000);
+        document.querySelector('.json').style.color = 'green'
+    }
 
     document.getElementById('email').value = '';
     document.getElementById('password').value = '';

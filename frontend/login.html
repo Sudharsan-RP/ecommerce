@@ -5,31 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>global login page</title>
   <link rel="stylesheet" href="../styles/login.css">
+   <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+  <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
 </head>
-<body>
+<body>    
   <div class="container">
+    <div id="json">
+        <!--toast msg-->
+    </div>
     <div class="title">
       login
     </div>
     <div class="email">
-      <label for="email">email </label> <br>
+      <label for="email">email </label> 
       <input type="email" id="email" placeholder="email" required>
     </div>
     <div class="password">
-      <label for="password">password </label><br>
+      <label for="password">password </label> 
       <input type="password" placeholder="password" id="password" required>
       <button id="show">
-        show
+        <box-icon name='hide' color="black"></box-icon>
       </button>
     </div>
     <div class="para">
-      <p><a href="signup.html">new user?signup</a></p>
+      <p><a href="signup.html">new user ? signup</a></p>
     </div>
     <div class="login">
       <button type="submit" id="login">login</button>
     </div>
 
-    <div id="json"></div>
   </div>
 
   <script src="../scripts/login.js"></script>
