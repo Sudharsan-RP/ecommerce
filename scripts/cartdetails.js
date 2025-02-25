@@ -31,7 +31,7 @@ async function fetchCartItems() {
         let cartHtml = '';
 
         data.forEach((item) => {
-
+            console.log(item)
             cartHtml =
                 `<div class="bottom-container">
                     <div class="img"><img src="${item.productImage}" alt="electronics"></div>

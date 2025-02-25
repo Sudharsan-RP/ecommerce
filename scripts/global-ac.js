@@ -9,7 +9,7 @@ products.forEach((product) => {
   productHtml = `
  <div class="product-container">
           <div class="image">
-            <a href="global-product-info.html" target="_balnk" height="${product.height}" width="${product.width}"><img src="${product.image}"></a>
+            <img src="${product.image}" data-product-id="${product.id}" class="product-image">
           </div>
 
           <div class="product-details">
@@ -80,7 +80,6 @@ document.querySelectorAll('.js-add-to-cart')
         document.querySelector(`.messages`).innerHTML = ` `
       }, 2500);
 
-      let matchingItem;
       const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`);
       const quantity = Number(quantitySelector.value);
 
@@ -102,11 +101,23 @@ document.querySelectorAll('.js-add-to-cart')
       cartButton.setAttribute('disabled', 'true');
       cartButton.innerText = 'Added to Cart'; // Optional: Change button text
       cartButton.style.backgroundColor = 'gray'; // Optional: Change button color
-  
+
     })
   })
   
 });
+
+document.querySelectorAll('.product-image').forEach((img) => {
+    let imgId = img.dataset.productId;
+    img.addEventListener('click', () => {
+        let productInfo = products.find((product) => product.id == imgId);
+        console.log(productInfo);
+        if(productInfo) {
+            localStorage.setItem('selectedProduct', JSON.stringify(productInfo));
+            window.location.href = "global-product-info.html"
+        }
+    })
+})
 
 const updateCartQuantity = async () => {
   try {

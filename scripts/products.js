@@ -2,14 +2,19 @@ export let products = [
   {
     id: 1,
     image: '../images/product-img/panasonic-fridge.webp',
-    name: 'Whirlpool 300 L Frost Free Triple-Door Refrigerator(FP 343D Protton Roy, Alpha Steel)',
+    name: 'Whirlpool 75 L Frost Free Triple-Door Refrigerator(FP 343D Protton Roy, Alpha Steel)',
     rating: {
       stars: '4.5',
       reviews: 10
     },
     price: 29990,
-    width: '150px',
-    height: '300px'
+    productInfo: {
+        productDimensions: "71.7D x 60.1W x 187.4H Centimeters",
+        brand: 'Whirlpool',
+        capacity: '75 litres',
+        configuration: 'Triple',
+        energyStar: '3star'
+    },
   },
   {
     id: 2,
@@ -20,8 +25,13 @@ export let products = [
       reviews: 15
     },
     price: 22990,
-    width: '150px',
-    height: '300px'
+    productInfo: {
+        productDimensions: "65.1D x 53.5W x 118.8H Centimeters",
+        brand: 'Whirlpool',
+        capacity: '184 Litres',
+        configuration: 'Single',
+        energyStar: '2Star'
+    },
   },
   {
     id: 3,
@@ -32,8 +42,13 @@ export let products = [
       reviews: 10
     },
     price: 18990,
-    width: '150px',
-    height: '300px'
+    productInfo: {
+        productDimensions: "63.7D x 55.5W x 168H Centimeters",
+        brand: 'LG',
+        capacity: '272 Litres',
+        configuration: 'Freezer-on-Top',
+        energyStar: '3Star'
+    },
   },
   {
     id: 4,
@@ -43,7 +58,14 @@ export let products = [
       stars: '4.0',
       reviews: 12
     },
-    price: 28990
+    price: 28990,
+    productInfo: {
+        productDimensions: "63.7D x 55.5W x 168H Centimeters",
+        brand: 'LG',
+        capacity: '272 Litres',
+        configuration: 'Freezer-on-Top',
+        energyStar: '3Star'
+    },
   },
   {
     id: 5,
@@ -53,7 +75,14 @@ export let products = [
       stars: '4.3',
       reviews: 15
     },
-    price: 34490
+    price: 34490,
+    productInfo: {
+        productDimensions: "63.7D x 55.5W x 168H Centimeters",
+        brand: 'LG',
+        capacity: '272 Litres',
+        configuration: 'Freezer-on-Top',
+        energyStar: '3Star'
+    },
   },
   {
     id: 6,
@@ -63,7 +92,14 @@ export let products = [
       stars: '4.2',
       reviews: 8
     },
-    price: 28490
+    price: 28490,
+    productInfo: {
+        productDimensions: "63.7D x 55.5W x 168H Centimeters",
+        brand: 'LG',
+        capacity: '272 Litres',
+        configuration: 'Freezer-on-Top',
+        energyStar: '3Star'
+    },
   },
   {
     id: 7,
@@ -73,7 +109,14 @@ export let products = [
       stars: '4.6',
       reviews: 15
     },
-    price: 22990
+    price: 22990,
+    productInfo: {
+        productDimensions: "63.7D x 55.5W x 168H Centimeters",
+        brand: 'LG',
+        capacity: '272 Litres',
+        configuration: 'Freezer-on-Top',
+        energyStar: '3Star'
+    },
   },
   {
     id: 8,
@@ -83,7 +126,14 @@ export let products = [
       stars: '4.1',
       reviews: 6
     },
-    price: 19990
+    price: 19990,
+    productInfo: {
+        productDimensions: "63.7D x 55.5W x 168H Centimeters",
+        brand: 'LG',
+        capacity: '272 Litres',
+        configuration: 'Freezer-on-Top',
+        energyStar: '3Star'
+    },
   },
   {
     id: 9,
@@ -93,7 +143,14 @@ export let products = [
       stars: '3.8',
       reviews: 17
     },
-    price: 12490
+    price: 12490,
+    productInfo: {
+        productDimensions: "63.7D x 55.5W x 168H Centimeters",
+        brand: 'LG',
+        capacity: '272 Litres',
+        configuration: 'Freezer-on-Top',
+        energyStar: '3Star'
+    },
   }
 ]
 

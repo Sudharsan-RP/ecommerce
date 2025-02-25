@@ -1,0 +1,55 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+}
+
+.img {
+    padding: 10px;
+    flex: 1;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.name {
+    font-size: 24px;
+    font-weight: 500;
+    padding: 10px 0px;
+}
+
+.price {
+    font-size: 20px;
+    padding: 10px 0px;
+}
+
+table tr td:first-child {
+    font-weight: bold;
+}
+
+table tr td {
+    padding: 8px;
+}
+
+.about {
+    padding: 10px;
+}
+
+.about h4, h4 {
+    padding: 10px 0px;
+    font-size: 20px;
+    text-transform: capitalize;
+}
+
+.about ul li {
+    font-size: 17px;
+    padding: 5px 0px;
+}

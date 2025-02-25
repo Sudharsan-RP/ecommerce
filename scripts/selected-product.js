@@ -1,41 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>global product info page</title>
-  <link rel="stylesheet" href="../styles/global-product-info.css">
-</head>
-<body>
-  <div class="container">
+window.onload = function() {
+    let productData = localStorage.getItem("selectedProduct");
+    if (productData) {
+        productData = JSON.parse(productData);
+        console.log(productData);
+        
+        let html = `
     <div class="img">
-      <img src="../images/product-img/fridge.webp" alt="fridge" height="400px" width="200px">
+      <img src="${productData.image}" alt="fridge">
     </div>
     <div class="right">
-        <div class="name">LG 272 L 3 Star Frost-Free Smart Inverter Compressor Double Door Refrigerator </div>
-        <div class="ratings"> &#9733; &#9733; &#9733; &#9733;4.5</div>
-        <div class="price">$30,000</div>
+        <div class="name">${productData.name}</div>
+        <div class="ratings"> &#9733; &#9733; &#9733; &#9733;${productData.rating.stars}</div>
+        <div class="price">${productData.price}</div>
         <h4>product-details</h4>
         <table>
             <tr>
                 <td>Product Dimensions</td>
-                <td>63.7D x 55.5W x 168H Centimeters</td>
+                <td>${productData.productInfo.productDimensions}</td>
             </tr>
             <tr>
                 <td>Brand</td>
-                <td>LG</td>
+                <td>${productData.productInfo.brand}</td>
             </tr>
             <tr>
                 <td>Capacity</td>
-                <td>272 litres</td>
+                <td>${productData.productInfo.capacity}</td>
             </tr>
             <tr>
                 <td>Configuration</td>
-                <td>Freezer-on-Top</td>
+                <td>${productData.productInfo.configuration}</td>
             </tr>
             <tr>
                 <td>Energy Star</td>
-                <td>3 Star</td>
+                <td>${productData.productInfo.energyStar}</td>
             </tr>
         </table>
         <div class="about">
@@ -49,9 +46,9 @@
             </ul>
         </div>
     </div>
-  </div>
-
-  <script src="../scripts/selected-product.js"></script>
-
-</body>
-</html>
+        `
+        document.querySelector('.container').innerHTML = html
+    } else {
+        console.log("product data not found");
+    }
+};
